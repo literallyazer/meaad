@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meead Event Finder</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar animate__animated animate__slideInDown">
+        <div class="logo">Meead</div>
+        <div class="nav-links">
+            <a href="#about">About Meeads</a>
+            <a href="#events">Events</a>
+            <a href="#">Portfolio</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="text-content animate__animated animate__fadeInLeft">
+            <p>#1 EVENT FINDER</p>
+            <h1>EXPERIENCE <br> THE BEST <br> <span>EVENTS</span> <br> IN YOUR CITY</h1>
+            <a href="#" class="shop-now animate__animated animate__fadeInUp animate__delay-1s">FIND EVENTS</a>
+        </div>
+        <div class="image-content animate__animated animate__fadeInRight">
+            <img src="photo.jpg" alt="Event Image">
+        </div>
+    </div>
+
+    <!-- Event Search Section -->
+    <div class="search-section" data-aos="fade-up">
+        <h2 id="events">Search Events Nearby</h2>
+        <button id="geolocation-button" class="animate__animated animate__fadeIn animate__delay-1s">
+            Find Events Near Me
+        </button>
+        <div id="events-container" class="events-container"></div>
+        <div id="loading" class="loading" style="display:none;">Loading events...</div>
+    </div>
+
+    <div class="search-section" data-aos="fade-up">
+        <h2>Find Events by Location</h2>
+        <p>Enter your city or region.</p>
+        <input type="text" id="location-input" placeholder="Enter city or region" />
+        <button id="manual-search-button">Search Events</button>
+        <!-- Add this after the search section -->
+<div class="filters-section">
+    <h3>Filters</h3>
+    <div class="filter-controls">
+        <select id="category-filter">
+            <option value="">All Categories</option>
+            <option value="Music">Music</option>
+            <option value="Sports">Sports</option>
+            <option value="Arts">Arts & Theatre</option>
+            <option value="Family">Family</option>
+        </select>
+        
+        <div class="price-filter">
+            <input type="range" id="price-range" min="0" max="500" value="500">
+            <span id="price-value">Max Price: $500</span>
+        </div>
+    </div>
+</div>
+
+<!-- Theme Toggle Button -->
+<div class="theme-toggle">
+    <button id="theme-toggle-btn">
+        <i class="fas fa-moon"></i>
+    </button>
+</div>
+    </div>
+    
+    <div id="events-container" class="events-container"></div>
+
+    <!-- Favorites Section -->
+    <div class="favorites-section" data-aos="fade-up">
+        <h2>Your Favorite Events</h2>
+        <div id="favorites-container" class="favorites-container"></div>
+    </div>
+
+    <!-- About Section -->
+    <section class="about-section" data-aos="fade-up">
+        <h2 id="about">About the Project</h2>
+        <p>This project, Meead Event Finder, is designed to help users discover and explore events effortlessly. With a user-friendly interface and real-time data from the Ticketmaster API, users can easily find events that match their interests and preferences.</p>
+        
+        <div class="about-cards">
+            <div class="about-card event-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Event Discovery</h3>
+                <p>Find events by location, category, and date. Whether it's concerts, sports, or local festivals, discover something exciting near you!</p>
+            </div>
+            <div class="about-card event-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>User-Friendly Interface</h3>
+                <p>The intuitive design allows for easy navigation, making it simple for anyone to find events quickly and efficiently.</p>
+            </div>
+            <div class="about-card event-card" data-aos="fade-up" data-aos-delay="300">
+                <h3>Real-Time Data</h3>
+                <p>Access up-to-date information on events, including ticket prices and availability, ensuring you never miss out on an opportunity.</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    </script>
+    <script src="scripts.js"></script>
+</body>
+</html>
