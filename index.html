@@ -3,115 +3,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meead Event Finder</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <title>Meead - Discover Amazing Events</title>
+    <!-- Enhanced Font Selection -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="icon" href="Designer (8).jpeg">
 </head>
 <body>
-    <!-- Navbar -->
-    <div class="navbar animate__animated animate__slideInDown">
-        <div class="logo">Meead</div>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-outer"></div>
+    <div class="cursor-inner"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-calendar-alt logo-icon"></i>
+            <span class="logo-text">Meead</span>
+        </div>
         <div class="nav-links">
-            <a href="#about">About Meeads</a>
-            <a href="#events">Events</a>
-            <a href="#">Portfolio</a>
+            <a href="#about" class="nav-link">
+                <span>About</span>
+                <div class="link-hover-effect"></div>
+            </a>
+            <a href="#events" class="nav-link">
+                <span>Events</span>
+                <div class="link-hover-effect"></div>
+            </a>
+            <a href="#favorites" class="nav-link">
+                <span>Favorites</span>
+                <div class="link-hover-effect"></div>
+            </a>
+            <a href="https://literallyazer.github.io/portfolio" class="nav-link return-link">
+                <i class="fas fa-arrow-left"></i>
+                <span>Portfolio</span>
+                <div class="link-hover-effect"></div>
+            </a>
+        
+            <button id="theme-toggle-btn" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+                <div class="toggle-background"></div>
+            </button>
         </div>
-    </div>
+    </nav>
 
-    <!-- Main Content -->
-    <div class="content">
-        <div class="text-content animate__animated animate__fadeInLeft">
-            <p>#1 EVENT FINDER</p>
-            <h1>EXPERIENCE <br> THE BEST <br> <span>EVENTS</span> <br> IN YOUR CITY</h1>
-            <a href="#" class="shop-now animate__animated animate__fadeInUp animate__delay-1s">FIND EVENTS</a>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text-wrapper">
+                <h1 class="gradient-text animate__animated animate__fadeIn">Discover Amazing Events</h1>
+                <div class="main-title">
+                    <span class="line">EXPERIENCE</span>
+                    <span class="line">THE BEST</span>
+                    <span class="line highlight">EVENTS</span>
+                    <span class="line">IN YOUR CITY</span>
+                </div>
+                <p class="hero-description animate__animated animate__fadeIn animate__delay-1s">
+                    Find and book the most exciting events happening around you
+                </p>
+                <a href="#search" class="cta-button animate__animated animate__fadeIn animate__delay-2s">
+                    <span>Explore Events</span>
+                    <i class="fas fa-arrow-right"></i>
+                    <div class="button-background"></div>
+                </a>
+            </div>
+            <div class="hero-visual">
+                <div class="image-wrapper">
+                    <img src="Designer (7).jpeg" alt="Event Visual" class="parallax-img">
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="floating-elements">
+                    <div class="float-item" data-speed="2">🎭</div>
+                    <div class="float-item" data-speed="1.5">🎪</div>
+                    <div class="float-item" data-speed="3">🎨</div>
+                    <div class="float-item" data-speed="2.5">🎵</div>
+                </div>
+            </div>
         </div>
-        <div class="image-content animate__animated animate__fadeInRight">
-            <img src="photo.jpg" alt="Event Image">
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <div class="arrows">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-    </div>
-
-    <!-- Event Search Section -->
-    <div class="search-section" data-aos="fade-up">
-        <h2 id="events">Search Events Nearby</h2>
-        <button id="geolocation-button" class="animate__animated animate__fadeIn animate__delay-1s">
-            Find Events Near Me
+        <!-- Add this after your hero section -->
+<section id="about" class="about-overlay">
+    <div class="about-content">
+        <button class="close-about">
+            <i class="fas fa-times"></i>
         </button>
-        <div id="events-container" class="events-container"></div>
-        <div id="loading" class="loading" style="display:none;">Loading events...</div>
-    </div>
-
-    <div class="search-section" data-aos="fade-up">
-        <h2>Find Events by Location</h2>
-        <p>Enter your city or region.</p>
-        <input type="text" id="location-input" placeholder="Enter city or region" />
-        <button id="manual-search-button">Search Events</button>
-        <!-- Add this after the search section -->
-<div class="filters-section">
-    <h3>Filters</h3>
-    <div class="filter-controls">
-        <select id="category-filter">
-            <option value="">All Categories</option>
-            <option value="Music">Music</option>
-            <option value="Sports">Sports</option>
-            <option value="Arts">Arts & Theatre</option>
-            <option value="Family">Family</option>
-        </select>
         
-        <div class="price-filter">
-            <input type="range" id="price-range" min="0" max="500" value="500">
-            <span id="price-value">Max Price: $500</span>
+        <div class="about-grid">
+            <div class="about-section" data-aos="fade-up">
+                <h2>About Meead</h2>
+                <div class="section-content">
+                    <h3>Introduction</h3>
+                    <p>Meead is your gateway to discovering amazing events, powered by cutting-edge technology and designed with user experience in mind.</p>
+                </div>
+            </div>
+
+            <div class="about-section" data-aos="fade-up" data-aos-delay="100">
+                <div class="section-content">
+                    <h3>Purpose & Inspiration</h3>
+                    <p>Created to revolutionize how people discover and connect with events, Meead combines powerful search capabilities with an intuitive interface.</p>
+                </div>
+            </div>
+
+            <div class="about-section" data-aos="fade-up" data-aos-delay="200">
+                <div class="section-content">
+                    <h3>Core Features</h3>
+                    <ul>
+                        <li><i class="fas fa-search"></i> Smart location-based search</li>
+                        <li><i class="fas fa-filter"></i> Advanced filtering options</li>
+                        <li><i class="fas fa-heart"></i> Personalized recommendations</li>
+                        <li><i class="fas fa-mobile-alt"></i> Responsive design</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="about-section" data-aos="fade-up" data-aos-delay="300">
+                <div class="section-content">
+                    <h3>Technology Stack</h3>
+                    <div class="tech-stack">
+                        <span class="tech-item"><i class="fab fa-js"></i> JavaScript</span>
+                        <span class="tech-item"><i class="fab fa-html5"></i> HTML5</span>
+                        <span class="tech-item"><i class="fab fa-css3-alt"></i> CSS3</span>
+                        <span class="tech-item"><i class="fas fa-code"></i> APIs</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section" data-aos="fade-up" data-aos-delay="400">
+                <div class="section-content">
+                    <h3>Design Approach</h3>
+                    <p>Our design philosophy embraces modern aesthetics with glass morphism, fluid animations, and a carefully chosen color palette to create an immersive user experience.</p>
+                </div>
+            </div>
+
+            <div class="about-section" data-aos="fade-up" data-aos-delay="500">
+                <div class="section-content">
+                    <h3>Future Plans</h3>
+                    <div class="future-features">
+                        <div class="feature">
+                            <i class="fas fa-brain"></i>
+                            <span>AI-Powered Recommendations</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-users"></i>
+                            <span>Social Integration</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-globe"></i>
+                            <span>Global Event Network</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</section>
+    </section>
 
-<!-- Theme Toggle Button -->
-<div class="theme-toggle">
-    <button id="theme-toggle-btn">
-        <i class="fas fa-moon"></i>
-    </button>
-</div>
-    </div>
-    
-    <div id="events-container" class="events-container"></div>
+    <!-- Search Section -->
+    <section id="search" class="search-section">
+        <div class="search-container glass-effect">
+            <h2 class="section-title">Find Your Perfect Event</h2>
+            <div class="search-tabs">
+                <button class="tab-btn active" data-tab="location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Location</span>
+                </button>
+                <button class="tab-btn" data-tab="current">
+                    <i class="fas fa-location-crosshairs"></i>
+                    <span>Near Me</span>
+                </button>
+            </div>
+            
+            <div class="search-content active" data-content="location">
+                <div class="input-group glass-effect">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="location-input" placeholder="Enter city or region">
+                    <button id="manual-search-button" class="search-btn">
+                        <span>Search</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
 
-    <!-- Favorites Section -->
-    <div class="favorites-section" data-aos="fade-up">
-        <h2>Your Favorite Events</h2>
-        <div id="favorites-container" class="favorites-container"></div>
-    </div>
+            <div class="search-content" data-content="current">
+                <button id="geolocation-button" class="location-btn glass-effect">
+                    <i class="fas fa-location-dot"></i>
+                    <span>Use Current Location</span>
+                </button>
+            </div>
 
-    <!-- About Section -->
-    <section class="about-section" data-aos="fade-up">
-        <h2 id="about">About the Project</h2>
-        <p>This project, Meead Event Finder, is designed to help users discover and explore events effortlessly. With a user-friendly interface and real-time data from the Ticketmaster API, users can easily find events that match their interests and preferences.</p>
-        
-        <div class="about-cards">
-            <div class="about-card event-card" data-aos="fade-up" data-aos-delay="100">
-                <h3>Event Discovery</h3>
-                <p>Find events by location, category, and date. Whether it's concerts, sports, or local festivals, discover something exciting near you!</p>
+            <div class="filters glass-effect">
+                <div class="filter-group">
+                    <label>Category</label>
+                    <select id="category-filter" class="custom-select">
+                        <option value="">All Categories</option>
+                        <option value="Music">Music</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Arts">Arts & Theatre</option>
+                        <option value="Family">Family</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Cultural">Cultural</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Date Range</label>
+                    <div class="date-inputs">
+                        <input type="date" id="start-date" class="date-input">
+                        <input type="date" id="end-date" class="date-input">
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Price Range: <span id="price-value">$0 - $500</span></label>
+                    <div class="range-slider">
+                        <input type="range" id="price-range" min="0" max="500" value="500" class="slider">
+                        <div class="slider-progress"></div>
+                    </div>
+                </div>
             </div>
-            <div class="about-card event-card" data-aos="fade-up" data-aos-delay="200">
-                <h3>User-Friendly Interface</h3>
-                <p>The intuitive design allows for easy navigation, making it simple for anyone to find events quickly and efficiently.</p>
+        </div>
+
+        <div class="results-container">
+            <div id="loading" class="loading-spinner">
+                <div class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+                <span>Discovering amazing events...</span>
             </div>
-            <div class="about-card event-card" data-aos="fade-up" data-aos-delay="300">
-                <h3>Real-Time Data</h3>
-                <p>Access up-to-date information on events, including ticket prices and availability, ensuring you never miss out on an opportunity.</p>
-            </div>
+            <div id="events-container" class="events-grid"></div>
         </div>
     </section>
 
+    <!-- Featured Events Section --
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <h2 class="section-title">Why Choose Meead?</h2>
+        <div class="about-grid">
+            <div class="about-card" data-aos="fade-up">
+                <i class="fas fa-search"></i>
+                <h3>Smart Search</h3>
+                <p>Find events easily with our intelligent search system</p>
+            </div>
+            <div class="about-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Location Based</h3>
+                <p>Discover events happening near you</p>
+            </div>
+            <div class="about-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-heart"></i>
+                <h3>Save Favorites</h3>
+                <p>Keep track of events you're interested in</p>
+            </div>
+            <div class="about-card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-ticket-alt"></i>
+                <h3>Easy Booking</h3>
+                <p>Secure your tickets in just a few clicks</p>
+            </div>
+        </div>
+    </section>
+    <!-- Scripts -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 100
-        });
-    </script>
     <script src="scripts.js"></script>
 </body>
 </html>
